@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="shortcut icon" href="img/logotip-sheremetevo-ico.png" type="image/png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Редактировать вопрос</title>
+  <style>
+    html { overflow-x: hidden; }
+    </style>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/stylesheet.css">
+</head>
+<body style="background-color: #DCDCDC;">
+  <nav class="navbar navbar-light bg-light">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        <img src="img/logotip-sheremetevo.png" alt="" width="50" height="50">
+      </a>
+      <div class="d-flex">
+        <a href="loginsystem.html"><button class="btn btn-warning">Выйти</button></a>
+      </div>
+    </div>
+  </nav>
+  <div class="conteiner-md">
+    <div class="row" style="height: 55px;"></div>
+    <div class="row justify-content-center">
+      <div class="col-md-1"></div>
+      <div class="col-md-9 bg-light" style="border-radius: 10px;">
+        <h2 style="padding: 20px;">Редактировать вопрос</h2>
+        <form action="">
+          <div class="mb-3" style="padding: 20px; padding-top: 0px;">
+            <p>Добавить картинку</p>
+            <input type="file" class="form-control" id="inputGroupFile03" aria-describedby="inputGroupFileAddon03" aria-label="Upload">
+          </div>
+          <div class="mb-3" style="padding: 20px; padding-top: 0px;">
+            <p>Текст вопроса</p>
+            <textarea class="form-control" rows="2"></textarea>
+          </div>
+          <div class="mb-3" style="padding: 20px; padding-top: 0px;">
+            <p>Сопутствующее сообщение перед вопросом</p>
+            <textarea class="form-control" rows="2"></textarea>
+          </div>
+        </form>        
+        <h3 style="padding: 20px;">Ответы</h3>
+            <table class="table align-middle">
+              <thead>
+                <tr>                  
+                  <th scope="col" style="width: 48%;">ТЕКСТ ОТВЕТА</th>
+                  <th scope="col" style="width: 48%;">СЛЕДУЮЩИЙ ВОПРОС</th>
+                  <th scope="col" style="width: 6%;"></th>
+                </tr>
+              </thead>
+              <tbody class="ListAnsw">
+                <tr class="cont">                 
+                  <td class="text"></td>
+                  <td class="textQuest"></td>
+                  <td>
+                    <form action="">
+                      <button type="button" class="btn btn-warning btn-sm" style="margin-bottom: 10px;">
+                        <img src="img/cancel.png" alt="" style="padding: 2px;">
+                        </button>
+                        <button type="button" class="btn btn-warning btn-sm">
+                          <img src="img/settings.png" alt="" style="padding: 2px;">
+                        </button>
+                    </form>
+                </td>
+                </tr>
+                <tr>
+                  <form action="">
+                    <td><textarea class="form-control" rows="1"></textarea></td>
+                    <td>
+                      <div>
+                        <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
+                          <option selected>Open this select menu</option>
+                          <option value="1">One</option>
+                          <option value="2">Two</option>
+                          <option value="3">Three</option>
+                        </select>
+                      </div>
+                    </td>
+                    <td><button type="button" class="btn btn-warning btn-sm">
+                      <img src="img/plus.png" alt="" style="padding: 2px;">
+                    </button></td>
+                  </form>                           
+                </tr>
+              </tbody>
+            </table>
+            <form action="">
+                <a href="index.html"><button type="button" class="btn btn-warning btn-lg" style="margin: 15px;">
+                    Сохранить
+                  </button></a>
+            </form>      
+      </div>
+      <div class="col-md-1"></div>
+    </div>
+    <div class="row" style="height: 65px;"></div>
+  </div>
+  <script src="js/jquery-3.5.1.min.js"></script>
+  <script src="js/mainEditQuest.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+</body>
+</html>
