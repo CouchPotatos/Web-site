@@ -3,6 +3,67 @@ let lengthOfSelectMenu = 0;
 
 var saveBtn = $('#saveBtn')
 
+
+
+$.ajax({
+	type: 'GET',
+	url: "https://api-test-post.herokuapp.com/api/v1/answers/",
+	dataType: 'json',  	
+  	success: function(data){
+  		for (i; i < data.length; i++) {
+  			var newClass;
+  			if (i){
+  				var cloned = $('tbody > .cont').clone().prependTo('.ListAnsw');
+				
+  				newClass = 'cont' + i;
+  				cloned.removeClass('cont').addClass(newClass);
+				$("." + newClass + " div").attr("id", "app2");
+				let app = new Vue({
+					el: "#app2",
+					data: {
+						picked: false
+					}
+				});  
+			}
+  			var textQuest = data[i]['text'];
+  			var textBefore = data[i]['message_before_question'];
+  			let goto = data[i]['goto'];
+  			if (i){
+  				$('.' + newClass + ' .text').text(textQuest);	
+    			$('.' + newClass + ' .before').text(textBefore);	
+    			$('.' + newClass + ' .textQuest').text(goto);
+  			} else {
+  				$('.cont .text').text(textQuest);	
+    			$('.cont .before').text(textBefore);	
+    			$('.cont .textQuest').text(goto);   
+  			}
+		}
+    }
+});
+	
+
+
+/*
+
+$(".cont12 td form button").on('click', function(){
+	alert($(this).text());
+});
+
+*/
+
+
+saveBtn.on('click', function() {
+	let textQuest = document.getElementById('textQuest').value;
+	let messageBefore = document.getElementById("messageBefore").value;
+	alert(textQuest);
+	alert(messageBefore);
+});
+
+
+
+/*
+
+
 $.ajax({
 	type: 'GET',
 	url: "https://api-test-post.herokuapp.com/api/v1/questions/",
@@ -80,7 +141,7 @@ $.ajax({
 )
 
 
-
+*/
 
 	//$('.icons img').each(function(){
 	//	if ($(this).attr('src') == 'img/icon3.png'){

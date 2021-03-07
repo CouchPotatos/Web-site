@@ -1,6 +1,6 @@
 $.ajax({
 	type: 'GET',
-	url: "https://app-name112.herokuapp.com/api/v1/questions/?format=json",
+	url: "https://api-test-post.herokuapp.com/api/v1/questions/",
 	dataType: 'json',  	
   	success: function(data){
   		for (let i = 0; i < data.length; i++) {

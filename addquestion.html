@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="shortcut icon" href="img/logotip-sheremetevo-ico.png" type="image/png">
+  <link rel="shortcut icon" href="img/logotip-sheremetevo-ico.ico" type="image/ico">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Добавить вопрос</title>
@@ -18,7 +18,7 @@
         <img src="img/logotip-sheremetevo.png" alt="" width="50" height="50">
       </a>
       <div class="d-flex">
-        <a href="loginsystem.html"><button class="btn btn-warning">Выйти</button></a>
+        <a href="index.html"><button class="btn btn-warning">Выйти</button></a>
       </div>
     </div>
   </nav>
@@ -27,8 +27,8 @@
     <div class="row justify-content-center">
       <div class="col-md-1"></div>
       <div class="col-md-9 bg-light" style="border-radius: 10px;">
-        <h2 style="padding: 20px;">Добавить вопрос</h2>
-        <form action="">
+        <h2 style="padding: 20px;">Добавить ответ</h2>
+        <!--<form action="">
           <div class="mb-3" style="padding: 20px; padding-top: 0px;">
             <p>Добавить картинку</p>
             <input type="file" class="form-control" id="inputGroupFile03" aria-describedby="inputGroupFileAddon03" aria-label="Upload">
@@ -41,8 +41,8 @@
             <p>Сопутствующее сообщение перед вопросом</p>
             <textarea class="form-control" rows="2"></textarea>
           </div>
-        </form>        
-        <h3 style="padding: 20px;">Ответы</h3>
+        </form>       
+      --> 
             <table class="table align-middle">
               <thead>
                 <tr>                  
@@ -81,7 +81,7 @@
                         </select>
                       </div>
                     </td>
-                    <td><button type="button" class="btn btn-warning btn-sm">
+                    <td><button type="button" class="btn btn-warning btn-sm" id="saveBtn">
                       <img src="img/plus.png" alt="" style="padding: 2px;">
                     </button></td>
                   </form>                           
@@ -89,9 +89,10 @@
               </tbody>
             </table>
             <form action="">
-                <button type="button" class="btn btn-warning btn-lg" style="margin: 15px;" id="saveBtn">
-                    Сохранить
+                <a href="main.html"><button type="button" class="btn btn-warning btn-lg" style="margin: 15px;">
+                    Сохранить данные
                   </button>
+                </a>
             </form>      
       </div>
       <div class="col-md-1"></div>

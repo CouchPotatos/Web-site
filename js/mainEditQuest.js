@@ -2,7 +2,7 @@ let i = 0;
 
 $.ajax({
 	type: 'GET',
-	url: "https://app-name112.herokuapp.com/api/v1/questions/?format=json",
+	url: "https://api-test-post.herokuapp.com/api/v1/questions/",
 	dataType: 'json',  	
   	success: function(data){
         	
@@ -11,7 +11,7 @@ $.ajax({
 
 $.ajax({
 	type: 'GET',
-	url: "https://app-name112.herokuapp.com/api/v1/answers/?format=json",
+	url: "https://api-test-post.herokuapp.com/api/v1/answers/",
 	dataType: 'json',  	
   	success: function(data){
   		for (i; i < data.length; i++) {
