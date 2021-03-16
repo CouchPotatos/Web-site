@@ -3,11 +3,15 @@ let lengthOfSelectMenu = 0;
 
 var saveBtn = $('#saveBtn')
 
+let request;
+
 $.ajax({
 	type: 'GET',
 	url: "https://api-test-post.herokuapp.com/api/v1/answers/",
 	dataType: 'json',  	
   	success: function(data){
+		request = data;
+
   		for (i; i < data.length; i++) {
   			var newClass;
   			
@@ -47,8 +51,48 @@ $(".cont12 td form button").on('click', function(){
 saveBtn.on('click', function() {
 	let textQuest = document.getElementById('textQuest').value;
 	let messageBefore = document.getElementById("messageBefore").value;
-	alert(textQuest);
-	alert(messageBefore);
+	let arr = [];
+	for (let j = i - 1; j >= 0; j--){
+		let newClass;
+		newClass = 'cont' + j;		
+		if ($('.' + newClass + ' #true').length === 1){
+			arr.push($('.' + newClass + ' .text').text());
+		};
+	}
+	let questlist = [];
+		for (let x = 0; x < i; x++){
+			for (let t = 0; t < arr.length; t++){
+				if (request[x]['text'] === arr[t]){
+					questlist.push(request[x]['id']);
+				}
+			}
+		}
+	console.log(questlist);
+	console.log(textQuest);
+	console.log(messageBefore);
+	let value = questlist;
+	let sl;
+	sl = JSON.stringify({"text": textQuest, "message_before_question": messageBefore, "answers": value})
+	console.log(sl);
+
+	$.ajax({
+		type: 'POST',
+		url: 'https://api-test-post.herokuapp.com/auth/token/login',
+		data: { "password": "admin", "username": "admin"},
+		success: function() {
+			fetch('https://api-test-post.herokuapp.com/api/v1/question/create', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: sl
+			}).then(() => {
+				alert('Данные успешно записаны в БД');
+				window.location.href = "main.html";
+			});
+			}
+	})
+	
 });
 
 
@@ -123,7 +167,7 @@ $.ajax({
 						data: {"text": textAnsw, "goto": idQuest},
 						success: function(){
 							alert('Данные успешно записаны в БД')
-						}
+						}	
 					})
 				}
 			})

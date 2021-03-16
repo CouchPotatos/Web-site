@@ -2,15 +2,6 @@ let i = 0;
 
 $.ajax({
 	type: 'GET',
-	url: "https://api-test-post.herokuapp.com/api/v1/questions/",
-	dataType: 'json',  	
-  	success: function(data){
-        	
-    }
-});
-
-$.ajax({
-	type: 'GET',
 	url: "https://api-test-post.herokuapp.com/api/v1/answers/",
 	dataType: 'json',  	
   	success: function(data){

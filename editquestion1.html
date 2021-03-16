@@ -46,9 +46,9 @@
             <table class="table align-middle">
               <thead>
                 <tr>                  
-                  <th scope="col" style="width: 40%;">ТЕКСТ ОТВЕТА</th>
-                  <th scope="col" style="width: 20%;">СЛЕДУЮЩИЙ ВОПРОС</th>
-                  <th scope="col" style="width: 25%;"></th>
+                  <th scope="col" style="width: 40%; padding-left: 10px;">ТЕКСТ ОТВЕТА</th>
+                  <th scope="col" style="width: 30%;">СЛЕДУЮЩИЙ ВОПРОС</th>
+                  <th scope="col" style="width: 15%;"></th>
                 </tr>
               </thead>
               <tbody class="ListAnsw">
@@ -57,7 +57,7 @@
                   <td class="textQuest"></td>
                   <td>
                     <div class="container-md" id="app1">
-                      <button class="btn btn-warning" @click="picked = !picked">
+                      <button class="btn btn-warning" @click="picked = !picked" v-bind:id="picked">
                         <span v-show="!picked">Выбрать</span>
                         <span v-show="picked"><strong>Выбрано ✔</strong></span>
                       </button>
@@ -86,9 +86,9 @@
               </tbody>
             </table>
             <form action="">
-                <a href="main.html"><button type="button" class="btn btn-warning btn-lg" style="margin: 15px;" id="saveBtn">
+                <button type="button" class="btn btn-warning btn-lg" style="margin: 15px;" id="saveBtn">
                     Сохранить
-                  </button></a>
+                  </button>
             </form>      
       </div>
       <div class="col-md-1"></div>
