@@ -33,11 +33,27 @@ $.ajax({
   			$('.' + newClass + ' .text').text(textQuest);	
     		$('.' + newClass + ' .before').text(textBefore);	
     		$('.' + newClass + ' .textQuest').text(goto);
-		}
-    }
+    	}
+	}
 });
 
-
+$.ajax({
+	type: 'GET',
+	url: "https://api-test-post.herokuapp.com/api/v1/questions/",
+	dataType: 'json',  	
+	success: function(data){
+		for (let x = 0; x < i; x++){
+			let newClass;
+			newClass = 'cont' + x;
+			for (let j = 0; j < data.length; j++){
+				if ($('.' + newClass + ' .textQuest').text() == data[j]['id']){
+					$('.' + newClass + ' .textQuest').text(data[j]['text'])
+				}
+			}
+			
+		}
+	}
+})
 
 /*
 
@@ -78,7 +94,7 @@ saveBtn.on('click', function() {
 	$.ajax({
 		type: 'POST',
 		url: 'https://api-test-post.herokuapp.com/auth/token/login',
-		data: { "password": "admin", "username": "admin"},
+		data: { "password": "SherBot", "username": "admin"},
 		success: function() {
 			fetch('https://api-test-post.herokuapp.com/api/v1/question/create', {
 				method: 'POST',
@@ -90,7 +106,7 @@ saveBtn.on('click', function() {
 				alert('Данные успешно записаны в БД');
 				window.location.href = "main.html";
 			});
-			}
+		}
 	})
 	
 });
