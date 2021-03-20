@@ -1,5 +1,9 @@
 let i = 0;
 
+function upload(a) {
+	$('#number').text(a[a.length]);
+};
+
 $.ajax({
 	type: 'GET',
 	url: "https://api-test-post.herokuapp.com/api/v1/answers/",

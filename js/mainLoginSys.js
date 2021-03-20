@@ -2,7 +2,7 @@ let flag = true
 $('.btn').on('click', function() {
     var login = document.getElementById('login').value
     var password = document.getElementById('password').value
-    if (login === 'admin' && password === 'admin'){
+    if (login === 'admin' && password === 'SherBot'){
             window.location.href = "main.html";
         } else {
             if (flag){

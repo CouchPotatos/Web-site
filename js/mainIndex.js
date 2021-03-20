@@ -1,3 +1,5 @@
+// makeDTO(1);
+
 $.ajax({
 	type: 'GET',
 	url: "https://api-test-post.herokuapp.com/api/v1/questions/",
@@ -5,20 +7,13 @@ $.ajax({
   	success: function(data){
   		for (let i = 0; i < data.length; i++) {
   			var newClass;
-  			if (i){
-  				var cloned = $('tbody > .cont').clone().appendTo('tbody');
-  				newClass = 'cont' + i;
-  				cloned.removeClass('cont').addClass(newClass);
-  			}
+  			var cloned = $('tbody > .cont').clone().appendTo('tbody');
+  			newClass = 'cont' + i;
+			cloned.removeClass('cont').addClass(newClass).css("display", "");
   			var textQuest = data[i]['text'];
   			var textBefore = data[i]['message_before_question'];
-  			if (i){
-  				$('.' + newClass + ' .text').text(textQuest);	
-    			$('.' + newClass + ' .before').text(textBefore);	
-  			} else {
-  				$('.cont .text').text(textQuest);	
-    			$('.cont .before').text(textBefore);	
-  			}
+  			$('.' + newClass + ' .text').text(textQuest);	
+    		$('.' + newClass + ' .before').text(textBefore);	
 		}	
     }
 });
