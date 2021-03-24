@@ -7,29 +7,31 @@ $.ajax({
   	success: function(data){
   		for (let i = 0; i < data.length; i++) {
   			var newClass;
+			let newId;
   			var cloned = $('tbody .cont').clone().appendTo('.main');
   			newClass = 'cont' + i;
+			newId = 'popedUp' + i;
 			cloned.removeClass('cont').addClass(newClass).css("display", "");
+			$('.' + newClass + ' form #popedUp').attr('id', newId);
+
+			$('#' + newId).on('click', function(){
+				$('html').css("overflow", "hidden");
+			});
+			
   			var textQuest = data[i]['text'];
   			var textBefore = data[i]['message_before_question'];
   			$('.' + newClass + ' .text').text(textQuest);	
     		$('.' + newClass + ' .before').text(textBefore);
-			$('#popedUp').on('click', function(){
-				$('html').css("overflow", "hidden");
-				console.log('suck');
-			});	
 		}	
     }
 });
 
 $('#popedUp').on('click', function(){
 	$('html').css("overflow", "hidden");
-	console.log('suck');
-});	
+});
 
 $('#closePopUp').on('click', function(){
 	$('html').css("overflow", "");
-	console.log('suck');
 });
 
 
