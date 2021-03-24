@@ -34,15 +34,15 @@
           <table class="table align-middle">
             <thead>
               <tr>
-                <th scope="col" style="width: 48%;">ТЕКСТ ВОПРОСА</th>
-                <th scope="col" style="width: 48%;">СООБЩЕНИЕ ПЕРЕД ВОПРОСОМ</th>
+                <th scope="col" style="width: 48%; text-align: center;">ТЕКСТ ВОПРОСА</th>
+                <th scope="col" style="width: 48%; text-align: center;">СООБЩЕНИЕ ПЕРЕД ВОПРОСОМ</th>
                 <th scope="col" style="width: 4%;"></th>
               </tr>
             </thead>
             <tbody class="main">
               <tr class="cont" style="display: none;">
-                <td class="text"></td>
-                <td class="before"></td>
+                <td class="text" style="text-align: center;"></td>
+                <td class="before" style="text-align: center;"></td>
                 <td>
                   <form action="">
                     <button type="button" class="btn btn-warning btn-sm" style="margin-bottom: 10px;">
@@ -77,12 +77,12 @@
     <div id="okno">
       <h4>Редактирование вопроса</h4>
       <div class="mb-2" style="padding-top: 0px;">
-        <p>Текст вопроса</p>
-        <textarea class="form-control" style="margin-top: -0.7em;" rows="1"></textarea>
+        <strong><p>Текст вопроса</p></strong>
+        <textarea id="textQ" class="form-control" style="margin-top: -0.7em;" rows="1"></textarea>
       </div>
       <div style="padding-top: -0.5em;">
-        <p class="">Сопутствующее сообщение перед вопросом</p>
-        <textarea class="form-control" style="margin-top: -0.7em;" rows="1"></textarea>
+        <strong><p>Сопутствующее сообщение перед вопросом</p></strong>
+        <textarea id="beforeQ" class="form-control" style="margin-top: -0.7em;" rows="1"></textarea>
       </div>
         </form>        
         <h4 style="margin-bottom: -0.06em; padding-top:10px">Ответы</h4>
@@ -94,24 +94,24 @@
               <th scope="col" style="width: 6%;"></th>
             </tr>
           </thead>
-          <tbody class="ListAnsw">
+          <tbody class="listAnsw">
             <tr class="contAnsw" style="display: none;">                 
               <td class="textAnsw"></td>
-              <td class="textQuest"></td>
+              <td class="goto"></td>
               <td>
                 <form action="">
-                  <button type="button" class="btn btn-warning btn-sm" style="margin-bottom: 10px;">
-                    <img src="img/cancel.png" alt="" style="padding: 2px;">
+                  <button type="button" class="btn btn-warning btn-sm">
+                    <img src="img/cancel.png" alt="">
                     </button>
-                    <button type="button" class="btn btn-warning btn-sm">
+                    <!--<button type="button" class="btn btn-warning btn-sm">
                       <img src="img/settings.png" alt="" style="padding: 2px;">
-                    </button>
+                    </button>-->
                 </form>
             </td>
             </tr>
           </tbody>
         </table>
-        <a href="#" class="close"><button id="closePopUp" type="button" class="btn btn-warning btn-lg" id="closePopUp">Закрыть окно</button></a></div></div>
+        <a href="" class="close"><button id="closePopUp" type="button" class="btn btn-warning btn-lg" id="closePopUp">Закрыть окно</button></a></div></div>
 
   <!--<script src="js/singleton.js"></script>
   <script src="js/DTO.js"></script>-->
