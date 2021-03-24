@@ -7,15 +7,29 @@ $.ajax({
   	success: function(data){
   		for (let i = 0; i < data.length; i++) {
   			var newClass;
-  			var cloned = $('tbody > .cont').clone().appendTo('tbody');
+  			var cloned = $('tbody .cont').clone().appendTo('.main');
   			newClass = 'cont' + i;
 			cloned.removeClass('cont').addClass(newClass).css("display", "");
   			var textQuest = data[i]['text'];
   			var textBefore = data[i]['message_before_question'];
   			$('.' + newClass + ' .text').text(textQuest);	
-    		$('.' + newClass + ' .before').text(textBefore);	
+    		$('.' + newClass + ' .before').text(textBefore);
+			$('#popedUp').on('click', function(){
+				$('html').css("overflow", "hidden");
+				console.log('suck');
+			});	
 		}	
     }
+});
+
+$('#popedUp').on('click', function(){
+	$('html').css("overflow", "hidden");
+	console.log('suck');
+});	
+
+$('#closePopUp').on('click', function(){
+	$('html').css("overflow", "");
+	console.log('suck');
 });
 
 
