@@ -13,13 +13,15 @@ $.ajax({
 			messageBefore.push(data[i]['message_before_question']);
 			answList.push(data[i]['answers']);
   			var newClass;
-			let newId;
+			let newId, newIdDelete;
   			var cloned = $('tbody .cont').clone().appendTo('.main');
   			newClass = 'cont' + i;
 			newId = 'popedUp' + i;
+			newIdDelete = 'popedUpDelete' + i;
 			cloned.removeClass('cont').addClass(newClass).css("display", "");
 			newId = 'popedUp' + i;
 			$('.' + newClass + ' form #popedUp').attr('id', newId);
+			$('.' + newClass + ' form #popedUpDelete').attr('id', newIdDelete);
   			var textQuest = data[i]['text'];
   			var textBefore = data[i]['message_before_question'];
   			$('.' + newClass + ' .text').text(textQuest);	
@@ -33,13 +35,11 @@ $.ajax({
 				for (let i = 0; i < answList[Number(newId.slice(7))].length; i++){
 					let question;
 					question = answList[Number(newId.slice(7))][i];
-					console.log(question);
 					$.ajax({
 						type: 'GET',
 						url: "https://api-test-post.herokuapp.com/api/v1/answer/" + question,
 						dataType: 'json',  	
 						  	success: function(data){
-								console.log(data['text']);
 								let cloned = $('.listAnsw .contAnsw').clone().appendTo('.listAnsw');
 								newClass = 'contAnsw' + i;
 								cloned.removeClass('contAnsw').addClass(newClass).css("display", "");
@@ -52,8 +52,21 @@ $.ajax({
 						  	}
 					});
 				}
-				/*height += 50;
-				$('#okno').css("height", String(height) + "px");*/
+			});
+
+			$('#' + newIdDelete).on('click', function(){
+				$('.cont' + i).css("background-color", "#C0C0C0");
+				$('html').css("overflow", "hidden");
+				$('#closePopUpDelete1').on('click', function(){
+					$.ajax({
+						type: 'DELETE',
+						url: 'http://127.0.0.1:8000/api/v1/question/' + String(i + 1) +'/delete',
+						success: function(result) {
+							alert(result);
+						}
+					});
+					
+				});
 			});
 		}	
     }
@@ -63,7 +76,21 @@ $('#popedUp').on('click', function(){
 	$('html').css("overflow", "hidden");
 });
 
+$('#popedUpDelete').on('click', function(){
+	$('html').css("overflow", "hidden");
+});
+
+
 $('#closePopUp').on('click', function(){
+	$('html').css("overflow", "");
+});
+
+$('#closePopUpDelete').on('click', function(){
+	$('html').css("overflow", "");
+});
+
+
+$('#closePopUp2').on('click', function(){
 	$('html').css("overflow", "");
 });
 
