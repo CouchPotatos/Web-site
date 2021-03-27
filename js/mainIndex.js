@@ -62,7 +62,12 @@ $.ajax({
 						type: 'DELETE',
 						url: 'http://127.0.0.1:8000/api/v1/question/' + String(i + 1) +'/delete',
 						success: function(result) {
-							alert(result);
+							if (result['failure'] === "undefined"){
+								alert(result['success']);
+							} else { 
+								alert(result['failure']);
+							}
+							window.location.href = "main.html";
 						}
 					});
 					
