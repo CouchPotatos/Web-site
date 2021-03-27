@@ -8,8 +8,14 @@ $.ajax({
 		let textArr = [];
 		let messageBefore = [];
 		let answList = [];
-  		for (let i = 0; i < data.length; i++) {
-			for (let j = 0; j <  data.length; j++){
+		let maxID = 0;
+		for (let i = 0; i < data.length; i++){
+			if (maxID < data[i]['id']){
+				maxID = data[i]['id'];
+			}
+		}
+		for (let i = 0; i < maxID; i++) {
+			for (let j = 0; j < data.length; j++){
 				if (i + 1 === data[j]['id']){
 					textArr.push(data[j]['text']);
 					messageBefore.push(data[j]['message_before_question']);
@@ -65,9 +71,9 @@ $.ajax({
 								url: 'https://api-test-post.herokuapp.com/api/v1/question/' + String(i + 1) +'/delete',
 								success: function(result) {
 									if (result['failure'] === "undefined"){
-										alert(result['success']);
+										alert(result["success"]);
 									} else { 
-										alert(result['failure']);
+										alert(result["failure"]);
 									}
 									window.location.href = "main.html";
 								}
