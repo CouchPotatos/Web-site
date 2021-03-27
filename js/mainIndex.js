@@ -62,7 +62,7 @@ $.ajax({
 						$('#closePopUpDelete1').on('click', function(){
 							$.ajax({
 								type: 'DELETE',
-								url: 'http://127.0.0.1:8000/api/v1/question/' + String(i + 1) +'/delete',
+								url: 'api-test-post.herokuapp.com/api/v1/question/' + String(i + 1) +'/delete',
 								success: function(result) {
 									if (result['failure'] === "undefined"){
 										alert(result['success']);
@@ -77,8 +77,6 @@ $.ajax({
 					});
 				}
 			}
-			
-
 		}	
     }
 });
