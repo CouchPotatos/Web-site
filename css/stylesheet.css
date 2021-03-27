@@ -11,6 +11,7 @@
         background-size: cover;
 
   }
+  
   #zatemnenie1 {
     background: rgba(102, 102, 102, 0.5);
         position: absolute;
@@ -22,8 +23,8 @@
         bottom: 0;
         display: none;
         background-size: cover;
-
   }
+
   #okno {
     width: 700px;
     height: 350px;

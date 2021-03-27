@@ -55,7 +55,7 @@ $.ajax({
 			});
 
 			$('#' + newIdDelete).on('click', function(){
-				$('.cont' + i).css("background-color", "#C0C0C0");
+				$('.cont' + i).css("background-color", "#D3D3D3");
 				$('html').css("overflow", "hidden");
 				$('#closePopUpDelete1').on('click', function(){
 					$.ajax({
