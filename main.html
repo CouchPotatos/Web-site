@@ -12,8 +12,6 @@
   <link rel="stylesheet" href="css/stylesheet.css">
 </head>
 <body style="background-color: #DCDCDC;">
-
-
   <nav class="navbar navbar-light bg-light">
     <div class="container">
       <a class="navbar-brand" href="#">
@@ -30,48 +28,87 @@
     <div class="row justify-content-center">
       <div class="col-md-1"></div>
       <div class="col-md-9 bg-light" style="border-radius: 10px;">
-        <h2 style="padding: 20px;">Вопросы</h1>
-          <table class="table align-middle">
-            <thead>
-              <tr>
-                <th scope="col" style="width: 48%; text-align: center;">ТЕКСТ ВОПРОСА</th>
-                <th scope="col" style="width: 48%; text-align: center;">СООБЩЕНИЕ ПЕРЕД ВОПРОСОМ</th>
-                <th scope="col" style="width: 4%;"></th>
-              </tr>
-            </thead>
-            <tbody class="main">
-              <tr class="cont" style="display: none;">
-                <td class="text" style="text-align: center;"></td>
-                <td class="before" style="text-align: center;"></td>
-                <td>
-                  <form action="">
-                    <a href="#zatemnenie1"><button type="button" id="popedUpDelete" class="btn btn-warning btn-sm" style="margin-bottom: 10px;">
-                      <img src="img/cancel.png" alt="" style="padding: 2px;">
-                    </button></a>
-                    <a href="#zatemnenie"><button type="button" id="popedUp" class="btn btn-warning btn-sm">
-                      <img src="img/settings.png" alt="" style="padding: 2px;">
-                    </button></a>
-                  </form>
-                </td>
-                </div>
-              </tr>
-            </tbody>
-          </table>
-          <form action="">
-            <a href="addquestion.html"><button type="button" class="btn btn-warning btn-lg" style="margin: 15px;">
-              <img src="img/plus.png" alt="" style="margin-top: -0.25em;">
-              Добавить ответ
-            </button></a>
-            <a href="editquestion1.html"><button type="button" class="btn btn-warning btn-lg" style="margin: 15px;">
-              <img src="img/plus.png" alt="" style="margin-top: -0.25em;">
-              Добавить вопрос
-            </button></a>
-          </form>
+        <div class="pt-2"></div>
+        <div class="tabs">
+          <input type="radio" name="tab-btn" id="tab-btn-1" value="" checked>
+          <label for="tab-btn-1" style="width: 170px;"><h2>Вопросы</h2></label>
+          <input type="radio" name="tab-btn" id="tab-btn-2" value="">
+          <label for="tab-btn-2" style="width: 170px;"><h2>Ответы</h2></label>
+          <div id="content-1">
+            <h2 style="padding: 20px;">Вопросы</h2>
+            <table class="table align-middle">
+              <thead>
+                <tr>
+                  <th scope="col" style="width: 48%; text-align: center;">ТЕКСТ ВОПРОСА</th>
+                  <th scope="col" style="width: 48%; text-align: center;">СООБЩЕНИЕ ПЕРЕД ВОПРОСОМ</th>
+                  <th scope="col" style="width: 4%;"></th>
+                </tr>
+              </thead>
+              <tbody class="main">
+                <tr class="cont" style="display: none;">
+                  <td class="text" style="text-align: center;"></td>
+                  <td class="before" style="text-align: center;"></td>
+                  <td>
+                    <form action="">
+                      <a href="#zatemnenie1"><button type="button" id="popedUpDelete" class="btn btn-warning btn-sm" style="margin-bottom: 10px;">
+                        <img src="img/cancel.png" alt="" style="padding: 2px;">
+                      </button></a>
+                      <a href="#zatemnenie"><button type="button" id="popedUp" class="btn btn-warning btn-sm">
+                        <img src="img/settings.png" alt="" style="padding: 2px;">
+                      </button></a>
+                    </form>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div id="content-2">
+            <h2 style="padding: 20px;">Ответы</h2>
+            <table class="table align-middle">
+              <thead>
+                <tr>                  
+                  <th scope="col" style="width: 48%;">ТЕКСТ ОТВЕТА</th>
+                  <th scope="col" style="width: 48%;">СЛЕДУЮЩИЙ ВОПРОС</th>
+                  <th scope="col" style="width: 6%;"></th>
+                </tr>
+              </thead>
+              <tbody class="ListAnswers">
+                 <tr class="contAnswer" style="display: none;">                 
+                  <td class="textAnswer"></td>
+                  <td class="nextQuest"></td>
+                  <td>
+                    <form action="">
+                      <a href="#zatemnenie2">
+                        <button type="button" class="btn btn-warning btn-sm" style="margin-bottom: 10px;">
+                          <img src="img/cancel.png" alt="" style="padding: 2px;">
+                        </button>
+                      </a>
+                      <button type="button" class="btn btn-warning btn-sm">
+                        <img src="img/settings.png" alt="" style="padding: 2px;">
+                      </button>
+                    </form>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        
+        <form action="">
+          <a href="addquestion.html"><button type="button" class="btn btn-warning btn-lg" style="margin: 15px;">
+            <img src="img/plus.png" alt="" style="margin-top: -0.25em;">
+            Добавить ответ
+          </button></a>
+          <a href="editquestion1.html"><button type="button" class="btn btn-warning btn-lg" style="margin: 15px;">
+            <img src="img/plus.png" alt="" style="margin-top: -0.25em;">
+            Добавить вопрос
+          </button></a>
+        </form></div>
       </div>
       <div class="col-md-1"></div>
     </div>
     <div class="row" style="height: 65px;"></div>
   </div>
+
 
   <div id="zatemnenie"><div class="container-md">
     <div id="okno">
@@ -100,16 +137,44 @@
               <td>
                 <form action="">
                   <button type="button" class="btn btn-warning btn-sm">
-                    <img src="img/cancel.png" alt="">
+                    <img src="img/cancel.png" alt="" style="padding: 2px;">
                     </button>
                     <!--<button type="button" class="btn btn-warning btn-sm">
                       <img src="img/settings.png" alt="" style="padding: 2px;">
                     </button>-->
                 </form>
-            </td>
+              </td>
             </tr>
           </tbody>
         </table>
+        <div id="addNewAnswerToQuestion">
+          <h5>Добавить ответ к этому вопросу</h5>
+          <table class="table align-middle">
+            <thead>
+              <tr>                  
+                <th scope="col" style="width: 150%;"></th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr>
+                  <td>
+                    <div class="ListQuest">
+                      <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
+                        <option selected>Откройте это меню выбора</option>
+                        <option class="menu" value="1"style="display: none;"></option>
+                      </select>
+                    </div>
+                  </td>
+                  <td>
+                    <button type="button" class="btn btn-warning btn-sm" id="saveBtn">
+                      <img src="img/plus.png" alt="" style="padding: 2px;">
+                    </button>
+                  </td>
+                </tr>
+            </tbody>
+          </table>
+        </div>
         <a href="" class="close"><button id="closePopUp" type="button" class="btn btn-warning btn-lg" id="closePopUp">Закрыть окно</button></a></div></div>
       </div>
     </div>
@@ -122,6 +187,18 @@
         </div>
         <button id="closePopUpDelete1" type="button" class="btn btn-warning btn-lg">Да, удалить вопрос</button>
         <a href="" class="close"><button id="closePopUpDelete2" type="button" class="btn btn-warning btn-lg">Нет, вернуться назад</button></a>
+      </div>
+    </div>
+  </div>
+  <div id="zatemnenie2">
+    <div class="container-md">
+      <div id="oknoDeleteAnsw">
+        <h4>Удаление ответа</h4>
+        <div class="mb-2" style="padding-top: 0px;">
+          <strong><p id="textQDelete">Вы уверены, что хотите удалить ответ?</p></strong>
+        </div>
+        <button id="closePopUpDelete3" type="button" class="btn btn-warning btn-lg">Да, удалить ответ</button>
+        <a href="#content-2" class="close"><button id="closePopUpDelete4" type="button" class="btn btn-warning btn-lg">Нет, вернуться назад</button></a>
       </div>
     </div>
   </div>
