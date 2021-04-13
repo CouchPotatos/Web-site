@@ -1,4 +1,3 @@
-// makeDTO(1);
 
 $.ajax({
 	type: 'GET',
@@ -15,23 +14,35 @@ $.ajax({
 			if (maxID < data[i]['id']){
 				maxID = data[i]['id'];
 				
-			}
-			while (k != data[i]['id']){
-				idList.push(-1);
-				k++;
-			}
-			if (k === data[i]['id']){
-				idList.push(data[i]['id']);
-				k++;
-			} 	
+			}	
 		}
-		let r = 0;
-		for (let j = 0; j < idList.length; j++){
-			if (idList[j] != -1){
-				textArr.push(data[r]['text']);
-				messageBefore.push(data[r]['message_before_question']);
-				answList.push(data[r]['answers']);
-				r++;
+		for (let i = 0; i < data.length; i++){
+			idList.push(data[i]['id']);
+		}
+		idList = idList.sort();
+		let r = 1;
+		for (let i = 0; i < idList.length; i++){
+			if (r != idList[i]){
+				idList.splice(i, 0, -1);
+			}
+			r++;
+		}
+		for (let i = 0; i < data.length - 1; i++) {
+			for (let j = 0; j < data.length - 1 - i; j++) {
+				if (data[j]['id'] > data[j + 1]['id']) {
+					let swap = data[j];
+					data[j] = data[j + 1];
+					data[j + 1] = swap;
+				}
+			}
+		}
+		let j = 0;
+		for (let i = 0; i < idList.length; i++){
+			if (idList[i] != -1){
+				textArr.push(data[j]['text']);
+				messageBefore.push(data[j]['message_before_question']);
+				answList.push(data[j]['answers']);
+				j++;
 			} else {
 				textArr.push('-1');
 				messageBefore.push('-1');
@@ -64,22 +75,82 @@ $.ajax({
 						$('#textQ').text(textArr[Number(newId.slice(7))]);
 						$('#beforeQ').text(messageBefore[Number(newId.slice(7))]);
 						let height = 460;
+						let chetAnsw = 0;
 						$.ajax({
 							type: 'GET',
 							url: "https://api-test-post.herokuapp.com/api/v1/answers/",
 							dataType: 'json',  
 							success: function(data){
 								let value = 0;
-								for (i; i < data.length; i++) {
+								for (let i = 0; i < data.length; i++) {
 									var textAnsw = data[i]['text'];
 									newClass = 'menu' + value;
    									value += 1;
-									var element = $('#floatingSelect');
+									chetAnsw += 1;
+									var element = $('#float');
 									var cloned = $('.menu').clone().appendTo(element);
 									cloned.removeAttr('value').attr({'value': value + 1}).text(textAnsw).removeClass('menu').addClass(newClass).css("display", "");
 								}	
 							}
 						})	
+						$('#addAnswerToQuest').on('click', function(){
+							let newAnswerVal = document.getElementById('float').value
+							let newAnswer = ""
+							for (var i = 0; i < chetAnsw; i++){
+								if ($('.menu' + i).attr('value') == newAnswerVal) {
+									newAnswer = $('.menu' + i).text()
+									let cloned = $('.listAnsw .0').clone().appendTo('.listAnsw');
+									newClass = 'contAnsw' + i;
+									$.ajax({
+										type: 'GET',
+										url: "https://api-test-post.herokuapp.com/api/v1/answer/" + String(newAnswerVal),
+										dataType: 'json',  
+										success: function(data){
+											let goto;
+											goto = data['goto'];
+											cloned.removeClass('0').addClass(newClass).css("display", "");
+											$('.' + newClass + ' .textAnsw').text(newAnswer).attr("id", String(newAnswerVal));	
+											$('.' + newClass + ' .goto').text(goto);
+											height += Number($('.' + newClass).height());
+											$('#okno').css("height", String(height) + "px");
+										}
+									})
+								}
+							} 
+						})
+						$('#saveEdiBtn').on('click', function(){
+							let textEdit = document.getElementById('textQ').value
+							let messageEdit = document.getElementById('beforeQ').value
+							let editlistAnswers = [];
+							$('.textAnsw').each(function() {
+								if ($(this).attr("id") != null){
+									editlistAnswers.push(Number($(this).attr("id")));
+								}
+							});
+							let sl = JSON.stringify({"text": textEdit, "message_before_question": messageEdit, "answers": editlistAnswers})
+							$.ajax({
+								type: 'POST',
+								url: 'https://api-test-post.herokuapp.com/auth/token/login',
+								data: {"username": "admin", "password": "SherBot"},
+								success: function() {
+									fetch('https://api-test-post.herokuapp.com/api/v1/question/' + String(Number(newId.slice(7)) + 1) + '/edit', {
+										method: 'PUT',
+										headers: {
+											'Content-Type': 'application/json'
+										},
+										body: sl
+									}).then((response) => {
+										if (response["status"] === 200){
+											alert('Данные успешно изменены');
+											window.location.href = "main.html";
+										} else {
+											alert('Произошла ошибка, проверьте правильность заполнения формы')
+										}
+									});								
+								}
+							})
+						})
+						
 						for (let i = 0; i < answList[Number(newId.slice(7))].length; i++){
 							let question;
 							question = answList[Number(newId.slice(7))][i];
@@ -87,17 +158,17 @@ $.ajax({
 								type: 'GET',
 								url: "https://api-test-post.herokuapp.com/api/v1/answer/" + question,
 								dataType: 'json',  	
-									success: function(data){
-										let cloned = $('.listAnsw .contAnsw').clone().appendTo('.listAnsw');
-										newClass = 'contAnsw' + i;
-										cloned.removeClass('contAnsw').addClass(newClass).css("display", "");
-										let textAnsw = data['text'];
-										let nextQuest = data['goto'];
-										$('.' + newClass + ' .textAnsw').text(textAnsw);	
-										$('.' + newClass + ' .goto').text(nextQuest);
-										height += Number($('.' + newClass).height());
-										$('#okno').css("height", String(height) + "px");
-									}
+								success: function(data){
+									let cloned = $('.listAnsw .0').clone().appendTo('.listAnsw');
+									newClass = String(question);
+									cloned.removeClass('0').addClass(newClass).css("display", "");
+									let textAnsw = data['text'];
+									let nextQuest = data['goto'];
+									$('.' + newClass + ' .textAnsw').text(textAnsw).attr("id", newClass);	
+									$('.' + newClass + ' .goto').text(nextQuest);
+									height += Number($('.' + newClass).height());
+									$('#okno').css("height", String(height) + "px");
+								}
 							});
 						}
 					});
@@ -110,22 +181,18 @@ $.ajax({
 								type: 'DELETE',
 								url: 'https://api-test-post.herokuapp.com/api/v1/question/' + String(i + 1) +'/delete',
 								success: function(result) {
-									if (result['failure'] === "undefined"){
-										alert(result["success"]);
-									} else { 
-										alert(result["failure"]);
-									}
+									alert(result['response'])
 									window.location.href = "main.html";
 								}
 							});
 							
 						});
 					});
-				}
 			}
-		}	
-    }
-});
+		}
+	}
+}
+})
 
 
 $.ajax({
@@ -165,10 +232,6 @@ $.ajax({
 	}
 });
 
-
-
-
-
 $('#popedUp').on('click', function(){
 	$('html').css("overflow", "hidden");
 });
@@ -190,7 +253,6 @@ $('#closePopUpDelete').on('click', function(){
 $('#closePopUp2').on('click', function(){
 	$('html').css("overflow", "");
 });
-
 
 	//$('.icons img').each(function(){
 	//	if ($(this).attr('src') == 'img/icon3.png'){
@@ -220,4 +282,4 @@ $('#closePopUp2').on('click', function(){
 	//}
 	//elemOut('mainText', 5000);
 
-	//$('.mainText').fadeOut(2000).fadeIn(3000);
+	//$('.mainText').fadeOut(2000).fadeIn(3000);*/

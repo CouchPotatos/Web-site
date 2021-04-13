@@ -62,14 +62,15 @@ $.ajax({
 				$.ajax({
 				type: 'POST',
 				url: 'https://api-test-post.herokuapp.com/auth/token/login',
-				data: {"username": "admin", "password": "admin"},
+				data: {"username": "admin", "password": "SherBot"},
 				success: function(response) {
 					$.ajax({
 						type: 'POST',
 						url: 'https://api-test-post.herokuapp.com/api/v1/answer/create',
 						data: {"text": textAnsw, "goto": idQuest},
 						success: function(){
-							alert('Данные успешно записаны в БД')
+							alert('Данные успешно записаны в БД');
+							window.location.href = "main.html";
 						}
 					})
 				}

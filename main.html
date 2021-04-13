@@ -131,7 +131,7 @@
             </tr>
           </thead>
           <tbody class="listAnsw">
-            <tr class="contAnsw" style="display: none;">                 
+            <tr class="0" style="display: none;" id="contCount">                 
               <td class="textAnsw"></td>
               <td class="goto"></td>
               <td>
@@ -160,14 +160,14 @@
                 <tr>
                   <td>
                     <div class="ListQuest">
-                      <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
+                      <select class="form-select" id="float" aria-label="Floating label select example">
                         <option selected>Откройте это меню выбора</option>
                         <option class="menu" value="1"style="display: none;"></option>
                       </select>
                     </div>
                   </td>
                   <td>
-                    <button type="button" class="btn btn-warning btn-sm" id="saveBtn">
+                    <button type="button" class="btn btn-warning btn-sm" id="addAnswerToQuest">
                       <img src="img/plus.png" alt="" style="padding: 2px;">
                     </button>
                   </td>
@@ -175,7 +175,10 @@
             </tbody>
           </table>
         </div>
-        <a href="" class="close"><button id="closePopUp" type="button" class="btn btn-warning btn-lg" id="closePopUp">Закрыть окно</button></a></div></div>
+        <button id="saveEdiBtn" type="button" class="btn btn-warning btn-lg">Сохранить данные</button>
+        <a href="" class="close"><button id="closePopUp" type="button" class="btn btn-warning btn-lg">Закрыть окно</button></a>
+        
+      </div></div>
       </div>
     </div>
   <div id="zatemnenie1">
