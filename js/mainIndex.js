@@ -111,8 +111,12 @@ $.ajax({
 											cloned.removeClass('0').addClass(newClass).css("display", "");
 											$('.' + newClass + ' .textAnsw').text(newAnswer).attr("id", String(newAnswerVal));	
 											$('.' + newClass + ' .goto').text(goto);
+											$("." + newClass + " td form button").attr("id", "deleteAnswerEditQuest" + String(newAnswerVal));
 											height += Number($('.' + newClass).height());
 											$('#okno').css("height", String(height) + "px");
+											$("#deleteAnswerEditQuest" + String(newAnswerVal)).on('click', function(){
+												console.log('удаление ответа номер ' + String(newAnswerVal))
+											})
 										}
 									})
 								}
@@ -159,15 +163,25 @@ $.ajax({
 								url: "https://api-test-post.herokuapp.com/api/v1/answer/" + question,
 								dataType: 'json',  	
 								success: function(data){
+									let contCount = "contCount" + question;
 									let cloned = $('.listAnsw .0').clone().appendTo('.listAnsw');
 									newClass = String(question);
-									cloned.removeClass('0').addClass(newClass).css("display", "");
+									cloned.removeClass('0').addClass(newClass).css("display", "").attr("id", contCount);
+									console.log(newClass)
 									let textAnsw = data['text'];
 									let nextQuest = data['goto'];
 									$('.' + newClass + ' .textAnsw').text(textAnsw).attr("id", newClass);	
 									$('.' + newClass + ' .goto').text(nextQuest);
+									$("." + newClass + " td form button").attr("id", "deleteAnswerEditQuest" + newClass);
 									height += Number($('.' + newClass).height());
 									$('#okno').css("height", String(height) + "px");
+									$("#deleteAnswerEditQuest" + newClass).on('click', function(){
+										
+										console.log('удаление ответа номер ' + String(question))
+										height -= Number($('.' + newClass).height());
+										document.getElementById(contCount).innerHTML = "";
+										$('#okno').css("height", String(height) + "px");
+									})
 								}
 							});
 						}
