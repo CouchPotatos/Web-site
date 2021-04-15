@@ -26,6 +26,20 @@
         display: none;
   }
 
+  #zatemnenie5 {
+    background: rgba(102, 102, 102, 0.5);
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        
+        background-size: cover;
+        display: none;
+  }
+
   #zatemnenie2 {
     background: rgba(102, 102, 102, 0.5);
         position: absolute;
@@ -89,10 +103,26 @@
     background: #fff;
   }
 
+  #oknoAnswEdit{
+    width: 570px;
+    height: 270px;
+    padding: 15px;  
+    border: 2px solid rgba(255, 193, 7);
+    border-radius: 10px;
+    color: #00000a;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    background: #fff;
+  }
+
   #zatemnenie:target {display: block;}
   #zatemnenie1:target {display: block;}
   #zatemnenie2:target {display: block;}
-
+  #zatemnenie5:target {display: block;}
 
   .close:hover {background: #e6e6ff;}
   .tabs {

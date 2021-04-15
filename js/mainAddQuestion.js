@@ -57,8 +57,11 @@ $.ajax({
 				if (data[i]['text'] == textNextQuest){
 						idQuest = data[i]['id']
 					}
-				}
+			}
 			
+			if (idQuest === 0){
+				alert('Проверьте правильность заполняемой формы')
+			} else {
 				$.ajax({
 				type: 'POST',
 				url: 'https://api-test-post.herokuapp.com/auth/token/login',
@@ -74,7 +77,8 @@ $.ajax({
 						}
 					})
 				}
-			})
+				})
+			}			
 		})
 	  }
 	}

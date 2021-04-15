@@ -1,4 +1,17 @@
 
+function Buble(arr) {
+	for (let i = 0; i < arr.length - 1; i++) {
+		for (let j = 0; j < arr.length - 1 - i; j++) {
+			if (arr[j] > arr[j + 1]) {
+				let swap = arr[j];
+				arr[j] = arr[j + 1];
+				arr[j + 1] = swap;
+			}
+		}
+	}
+	return arr;
+}
+
 $.ajax({
 	type: 'GET',
 	url: "https://api-test-post.herokuapp.com/api/v1/questions/",
@@ -19,7 +32,7 @@ $.ajax({
 		for (let i = 0; i < data.length; i++){
 			idList.push(data[i]['id']);
 		}
-		idList = idList.sort();
+		idList = Buble(idList);
 		let r = 1;
 		for (let i = 0; i < idList.length; i++){
 			if (r != idList[i]){
@@ -51,10 +64,7 @@ $.ajax({
 		}
 		for (let i = 0; i < maxID; i++) {
 			for (let j = 0; j < data.length; j++){
-				if (i + 1 === data[j]['id']){
-					textArr.push(data[j]['text']);
-					messageBefore.push(data[j]['message_before_question']);
-					answList.push(data[j]['answers']);	
+				if (i + 1 === data[j]['id']){	
 					var newClass;
 					let newId, newIdDelete;
 					var cloned = $('tbody .cont').clone().appendTo('.main');
@@ -115,7 +125,7 @@ $.ajax({
 											height += Number($('.' + newClass).height());
 											$('#okno').css("height", String(height) + "px");
 											$("#deleteAnswerEditQuest" + String(newAnswerVal)).on('click', function(){
-												console.log('удаление ответа номер ' + String(newAnswerVal))
+												console.log('Удаление ответа номер ' + String(newAnswerVal))
 											})
 										}
 									})
@@ -176,8 +186,7 @@ $.ajax({
 									height += Number($('.' + newClass).height());
 									$('#okno').css("height", String(height) + "px");
 									$("#deleteAnswerEditQuest" + newClass).on('click', function(){
-										
-										console.log('удаление ответа номер ' + String(question))
+										console.log('Удаление ответа номер ' + String(question))
 										height -= Number($('.' + newClass).height());
 										document.getElementById(contCount).innerHTML = "";
 										$('#okno').css("height", String(height) + "px");
@@ -199,9 +208,9 @@ $.ajax({
 									window.location.href = "main.html";
 								}
 							});
-							
 						});
 					});
+				
 			}
 		}
 	}
@@ -215,18 +224,106 @@ $.ajax({
 	dataType: 'json',  	
   	success: function(data){
 		request = data;
+		idListAnsw = []
+		for (let i = 0; i < data.length; i++){
+			idListAnsw.push(Number(data[i]['id']));
+		}
+		idListAnsw = Buble(idListAnsw);
+		let r = 1;
+		for (let i = 0; i < idListAnsw.length; i++){
+			if (r != idListAnsw[i]){
+				idListAnsw.splice(i, 0, -1);
+			}
+			r++;
+		}
+		for (let i = 0; i < data.length; i++) {
+			for (let j = 0; j < data.length - i - 1; j++) {
+				if (data[j]['id'] > data[j + 1]['id']) {
+					let swap = data[j];
+					data[j] = data[j + 1];
+					data[j + 1] = swap;
+				}
+			}
+		}
+		let textArrAnsw = []
+		let goto = []
+		let j = 0;
+		for (let i = 0; i < idListAnsw.length; i++){
+			if (idListAnsw[i] != -1){
+				textArrAnsw.push(data[j]['text']);
+				goto.push(data[j]['goto']);
+				j++;
+			} else {
+				textArrAnsw.push('-1');
+				goto.push(-1)
+			}	
+		}
 		let i = 0;
   		for (i; i < data.length; i++) {
-  			let newClass;
-  			let cloned = $('tbody > .contAnswer').clone().prependTo('.ListAnswers');
-  			newClass = 'contAnswer' + i;
-  			cloned.removeClass('contAnswer').addClass(newClass).css("display", "");			
-  			let textAnswer = data[i]['text'];
-  			let nextQuestion = data[i]['goto'];
-  			$('.' + newClass + ' .textAnswer').text(textAnswer);	
-    		$('.' + newClass + ' .nextQuest').text(nextQuestion);
-			
+			for (let j = 0; j < data.length; j++){
+				if (i + 1 === data[j]['id']){	
+  					let newClass;
+  					let cloned = $('tbody > .contAnswer').clone().prependTo('.ListAnswers');
+  					newClass = 'contAnswer' + i;
+  					cloned.removeClass('contAnswer').addClass(newClass).css("display", "");		
+					let textAnswer = textArrAnsw[j];
+					let nextQuestion = goto[j];
+					let newIdAnsw = 'popedUpAnsw' + i;
+					let newIdDeleteAnsw = 'popedUpDeleteAsnw' + i;
+					$('.' + newClass + ' form #popedUpAnsw').attr('id', newIdAnsw);
+					$('.' + newClass + ' form #popedUpDeleteAnsw').attr('id', newIdDeleteAnsw);
+					$('#' + newIdDeleteAnsw).on('click', function(){
+						$('.contAnswer' + i).css("background-color", "#D3D3D3");
+						$('html').css("overflow", "hidden");
+						$('#closePopUpDelete3').on('click', function(){
+							$.ajax({
+							type: 'DELETE',
+							url: 'https://api-test-post.herokuapp.com/api/v1/answer/' + String(i) +'/delete',
+								success: function(result) {
+									alert(result['response']);
+									window.location.href = "main.html";
+								}
+							});
+						})
+					})
+
+					$('#' + newIdAnsw).on('click', function(){
+						$('#textA').text(textArrAnsw[Number(newIdAnsw.slice(11))]);
+						$('#goto').text(goto[Number(newIdAnsw.slice(11))]);
+						$('#saveEditBtnAnsw').on('click', function(){
+							let textEditAnsw = document.getElementById('textA').value;
+							let goto = Number(document.getElementById('goto').value);
+							let sl = JSON.stringify({"text": textEditAnsw, "goto": goto})
+							$.ajax({
+								type: 'POST',
+								url: 'https://api-test-post.herokuapp.com/auth/token/login',
+								data: {"username": "admin", "password": "SherBot"},
+								success: function() {
+									fetch('https://api-test-post.herokuapp.com/api/v1/answer/' + String(Number(newIdAnsw.slice(11)) + 1) + '/edit', {
+										method: 'PUT',
+										headers: {
+											'Content-Type': 'application/json'
+										},
+										body: sl
+									}).then((response) => {
+										if (response["status"] === 200){
+											alert('Данные успешно изменены');
+											window.location.href = "main.html";
+										} else {
+											alert('Произошла ошибка, проверьте правильность заполнения формы')
+										}
+									});								
+								}
+							})
+						})
+					})
+
+  					$('.' + newClass + ' .textAnswer').text(textAnswer);	
+    				$('.' + newClass + ' .nextQuest').text(nextQuestion);
+				}
+			}
     	}
+		
 		$.ajax({
 			type: 'GET',
 			url: "https://api-test-post.herokuapp.com/api/v1/questions/",
@@ -243,6 +340,8 @@ $.ajax({
 				}
 			}
 		})
+		
+		
 	}
 });
 
@@ -254,7 +353,6 @@ $('#popedUpDelete').on('click', function(){
 	$('html').css("overflow", "hidden");
 });
 
-
 $('#closePopUp').on('click', function(){
 	$('html').css("overflow", "");
 });
@@ -262,7 +360,6 @@ $('#closePopUp').on('click', function(){
 $('#closePopUpDelete').on('click', function(){
 	$('html').css("overflow", "");
 });
-
 
 $('#closePopUp2').on('click', function(){
 	$('html').css("overflow", "");
