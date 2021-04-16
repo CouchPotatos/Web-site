@@ -1,6 +1,6 @@
 
 function Buble(arr) {
-	for (let i = 0; i < arr.length - 1; i++) {
+	for (let i = 0; i < arr.length - 1; i++) { 
 		for (let j = 0; j < arr.length - 1 - i; j++) {
 			if (arr[j] > arr[j + 1]) {
 				let swap = arr[j];
@@ -285,14 +285,36 @@ $.ajax({
 								}
 							});
 						})
-					})
+					})	
 
 					$('#' + newIdAnsw).on('click', function(){
+						$('html').css("overflow", "hidden");
 						$('#textA').text(textArrAnsw[Number(newIdAnsw.slice(11))]);
-						$('#goto').text(goto[Number(newIdAnsw.slice(11))]);
+						$('#goto').text(goto[Number(newIdAnsw.slice(11))])
+						$('#gotoCertain').attr({'value': nextQuestion});
+						let element = $('#floatingSelectAnswers');
+						$.ajax({
+						type: 'GET',
+						url: "https://api-test-post.herokuapp.com/api/v1/questions/",
+						dataType: 'json',  	
+						  	success: function(data){
+								for (let x = 0; x < data.length; x++){
+									if (goto[Number(newIdAnsw.slice(11))] === data[x]['id']){
+										$('#gotoCertain').text(data[x]['text'])
+									}
+									let clonedAnsw = $('.menuAnsw').clone().appendTo(element);
+									clonedAnsw.removeAttr('value').attr({'value': data[x]['id']}).removeClass('menuAnsw').addClass('menuAnsw' + String(x)).css("display", "").text(data[x]['text']);	
+								}
+						 	}
+						})
 						$('#saveEditBtnAnsw').on('click', function(){
 							let textEditAnsw = document.getElementById('textA').value;
-							let goto = Number(document.getElementById('goto').value);
+							let goto = $('#gotoCertain').attr('value');
+							if ($('#gotoCertain').text() === 'Не задано'){
+								goto = $('#gotoCertain').attr('value')
+							} else {
+								goto = document.getElementById('floatingSelectAnswers').value;
+							}
 							let sl = JSON.stringify({"text": textEditAnsw, "goto": goto})
 							$.ajax({
 								type: 'POST',
@@ -318,7 +340,7 @@ $.ajax({
 						})
 					})
 
-  					$('.' + newClass + ' .textAnswer').text(textAnswer);	
+  					$('.' + newClass + ' .textAnswer').text(textAnswer);
     				$('.' + newClass + ' .nextQuest').text(nextQuestion);
 				}
 			}

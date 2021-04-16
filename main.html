@@ -191,8 +191,14 @@
             <strong><p>Текст ответа</p></strong>
             <textarea id="textA" class="form-control" style="margin-top: -0.7em;" rows="1"></textarea>
             <strong><p>Следующий вопрос</p></strong>
-            <textarea id="goto" class="form-control" style="margin-top: -0.7em;" rows="1"></textarea>
-          </div>
+            
+            <div class="ListAnsw">
+              <select class="form-select" id="floatingSelectAnswers" aria-label="Floating label select example">
+                <option id="gotoCertain" value="" disabled selected hidden>Не задано</option>
+                <option class="menuAnsw" value="1" style="display: none;">One</option>
+              </select>          
+            </div>
+          
           <button id="saveEditBtnAnsw" type="button" class="btn btn-warning btn-lg mt-2">Сохранить данные</button>
           <a href="" class="close"><button id="closePopUp" type="button" class="btn btn-warning btn-lg mt-2">Закрыть окно</button></a>
         </div></div>
@@ -211,6 +217,7 @@
       </div>
     </div>
   </div>
+
   <div id="zatemnenie2">
     <div class="container-md">
       <div id="oknoDeleteAnsw">
