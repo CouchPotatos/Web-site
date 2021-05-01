@@ -6,7 +6,7 @@ function upload(a) {
 
 $.ajax({
 	type: 'GET',
-	url: "https://api-test-post.herokuapp.com/api/v1/answers/",
+	url: "https://last-api.herokuapp.com/api/v1/answers/",
 	dataType: 'json',  	
   	success: function(data){
   		for (i; i < data.length; i++) {

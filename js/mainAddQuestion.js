@@ -5,7 +5,7 @@ var saveBtn = $('#saveBtn')
 
 $.ajax({
 	type: 'GET',
-	url: "https://api-test-post.herokuapp.com/api/v1/questions/",
+	url: "https://last-api.herokuapp.com/api/v1/questions/",
 	dataType: 'json',  	
   	success: function(data){
 		lengthOfSelectMenu = data.length;
@@ -64,12 +64,12 @@ $.ajax({
 			} else {
 				$.ajax({
 				type: 'POST',
-				url: 'https://api-test-post.herokuapp.com/auth/token/login',
+				url: 'https://last-api.herokuapp.com/auth/token/login',
 				data: {"username": "admin", "password": "SherBot"},
 				success: function(response) {
 					$.ajax({
 						type: 'POST',
-						url: 'https://api-test-post.herokuapp.com/api/v1/answer/create',
+						url: 'https://last-api.herokuapp.com/api/v1/answer/create',
 						data: {"text": textAnsw, "goto": idQuest},
 						success: function(){
 							alert('Данные успешно записаны в БД');

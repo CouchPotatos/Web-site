@@ -7,7 +7,7 @@ let request;
 
 $.ajax({
 	type: 'GET',
-	url: "https://api-test-post.herokuapp.com/api/v1/answers/",
+	url: "https://last-api.herokuapp.com/api/v1/answers/",
 	dataType: 'json',  	
   	success: function(data){
 		request = data;
@@ -39,7 +39,7 @@ $.ajax({
 
 $.ajax({
 	type: 'GET',
-	url: "https://api-test-post.herokuapp.com/api/v1/questions/",
+	url: "https://last-api.herokuapp.com/api/v1/questions/",
 	dataType: 'json',  	
 	success: function(data){
 		for (let x = 0; x < i; x++){
@@ -93,10 +93,10 @@ saveBtn.on('click', function() {
 
 	$.ajax({
 		type: 'POST',
-		url: 'https://api-test-post.herokuapp.com/auth/token/login',
+		url: 'https://last-api.herokuapp.com/auth/token/login',
 		data: { "password": "SherBot", "username": "admin"},
 		success: function() {
-			fetch('https://api-test-post.herokuapp.com/api/v1/question/create', {
+			fetch('https://last-api.herokuapp.com/api/v1/question/create', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'
@@ -118,7 +118,7 @@ saveBtn.on('click', function() {
 
 $.ajax({
 	type: 'GET',
-	url: "https://api-test-post.herokuapp.com/api/v1/questions/",
+	url: "https://last-api.herokuapp.com/api/v1/questions/",
 	dataType: 'json',  	
   	success: function(data){
 		lengthOfSelectMenu = data.length;
@@ -174,12 +174,12 @@ $.ajax({
 			
 				$.ajax({
 				type: 'POST',
-				url: 'https://api-test-post.herokuapp.com/auth/token/login',
+				url: 'https://last-api.herokuapp.com/auth/token/login',
 				data: {"username": "admin", "password": "admin"},
 				success: function(response) {
 					$.ajax({
 						type: 'POST',
-						url: 'https://api-test-post.herokuapp.com/api/v1/answer/create',
+						url: 'https://last-api.herokuapp.com/api/v1/answer/create',
 						data: {"text": textAnsw, "goto": idQuest},
 						success: function(){
 							alert('Данные успешно записаны в БД')
